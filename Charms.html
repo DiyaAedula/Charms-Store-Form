@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bracelet Store Form</title>
+        <style>
+            body{
+                background-color:rgb(124, 124, 255);
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            .shopContainer{
+                background-color:white;
+                margin:0 auto;
+                border-radius:20px;
+                max-width:1200px;
+                overflow:hidden;
+                box-shadow:0 20px 60px rgba(0, 0, 0, 0.3)
+            }
+            .mainContent{
+                display:grid; grid-template-columns:1fr 1fr;
+                gap:30px;
+                padding:30px;
+            }
+            header{
+                text-align:center;
+                background-color:rgb(255, 149, 166);
+                border-radius:10px;
+                padding:5px;
+            }
+            .formSide{
+                background-color:rgb(236, 236, 236);
+                padding:30px;
+                border-radius:10px;
+            }
+            .formGroup{
+                margin-bottom:20px;
+            }
+            label{
+                display:block;
+                margin-bottom:2px;
+                font-weight:bold;
+            }
+            input[type="text"],input[type="email"], input[type="tel"], input[type="number"], select, textarea{
+                border:2px solid rgb(209, 209, 209);
+                border-radius:5px;
+                padding:5px;
+                width:100%;
+                font-size:1rem;
+                transition:all 0.3s ease;
+            }
+            input[type="text"]:focus,input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus, select:focus, textarea:focus{
+                border-color:rgb(106, 106, 255);
+                box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
+                outline:none;
+            }
+            .radioGroup, .checkboxGroup{
+                display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap:15px;
+                margin-top:15px;
+            }
+            .radioOption, .checkboxOption{
+                display:flex;
+                align-items:center;
+                padding:10px;
+                background:white;
+                border:2px solid rgb(209, 209, 209);
+                border-radius:5px;
+                transition:all 0.3s ease;
+            }
+            .radioOption:hover, .checkboxOption:hover{
+                border-color:rgb(106, 106, 255);
+                box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
+                transform:translateY(-2px)
+            }
+            .orderSummary{
+                border: 3px solid rgb(236, 236, 236);
+                border-radius:10px;
+                padding:25px;
+                color:gray;
+                box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+                position:sticky;
+                top:20px;
+            }
+            .summaryItem{
+                padding:10px 0;
+                border-bottom: 1px solid rgb(119, 119, 119)
+            }
+            .summaryItem:last-child{
+                border-bottom:none;
+            }
+            .priceBreakdown{
+                background-color:whitesmoke;
+                padding:15px;
+                border-radius:10px;
+                margin:15px 0;
+            }
+            .priceRow{
+                display:flex;
+                justify-content: space-between;
+                margin:8px 0;
+                font-size:0.95em;
+            }
+            .totalPrice{
+                font-size:1.5em;
+                font-weight:bold;
+                color:rgb(189, 52, 189);
+                text-align:center;
+                margin:20px 0;
+                padding:15px;
+                border-radius:10px;
+            }
+            .sectionTitle{
+                color:black;
+            }
+            .confirmOrder{
+                background-color:rgb(207, 157, 255);
+                padding:5px;
+                border-radius:10px;
+            }
+            .changeQuantity{
+                border-radius:200px;
+                font-size:20px;
+                background-color:rgb(103, 0, 238);
+                width:30px;
+                height:30px;
+            }
+            .quantityBox{
+                display:flex;
+                align-items:center;
+                gap:10px;
+                margin-bottom:20px;
+            }
+            .quantity{
+                font-size: 1.1rem;
+                margin-left:20px;
+                margin-right:20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="shopContainer">
+            <header>
+                <h1>Charm Bracelet Store</h1>
+                <p>Make your own custom bracelet!</p>
+            </header>
+            <div class="mainContent">
+                <section class="formSide">
+                    <h2 class="sectionTitle">Order Details</h2>
+                    <div class="formGroup">
+                        <label for="customerName">Full Name:</label>
+                        <input type="text" id="customerName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="formGroup">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="you@email.com" required>
+                    </div>
+                    <div class="formGroup">
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="tel" id="phoneNumber" placeholder="123-456-7890" required>
+                    </div>
+                    <div class="formGroup">
+                        <div id="braceletTypeGroup" class="radioGroup">
+                        <label for="braceletType">Bracelet Type:</label>
+                        <div class="radioOption">
+                        <input type="radio" id="classic" name="braceletType"value="Classic">
+                        <label for="classic">Classic ($25.99)</label>
+                        </div>
+                        <div class="radioOption">
+                        <input type="radio" id="charm"name="braceletType" value="Charm">
+                        <label for="charm">Charm ($34.99)</label>
+                        </div>
+                        <div class="radioOption">
+                        <input type="radio" id="beaded" name="braceletType" value="Beaded">
+                        <label for="beaded">Beaded (31.99)</label>
+                        </div>
+                        <div class="radioOption">
+                        <input type="radio" id="Leather"name="braceletType" value="Leather">
+                        <label for="leather">Leather(37.99)</label>
+                        </div>
+                    </div>
+                    <div class="formGroup">
+                        <label for="braceletSize">Bracelet Size:</label>
+                        <select id="braceletSize" required>
+                            <option value="">select</option>
+                            <option value="XS">Extra Small</option>
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">Extra Large</option>
+                        </select>
+                    </div>
+                    <div class="formGroup">
+                        <label for="chainMaterial">Chain Material:</label>
+                        <select id="chainMaterial" required>
+                            <option value="">select</option>
+                            <option value="string">String</option>
+                            <option value="elastic">Elastic</option>
+                            <option value="silk cord">Silk Cord</option>
+                        </select>
+                    </div>
+                    <div class="formGroup">
+                        <label for="selectCharms">Select Charms ($4.99 each)</label>
+                        <br>
+                        <div class="checkboxGroup" id="charmsGroup">
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Heart" value="Heart">
+                        <label for="Heart">🩷Heart</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Star" value="Star">
+                        <label for="Star">⭐Star</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Moon" value="Moon">
+                        <label for="Moon">🌙Moon</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Flower" value="Flower">
+                        <label for="Flower">🌸Flower</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Butterfly" value="Butterfly">
+                        <label for="Butterfly">🦋Butterfly</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Infinity" value="Infinity">
+                        <label for="Infinity">♾️Infinity</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Key" value="Key">
+                        <label for="Key">🔑Key</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Crown" value="Crown">
+                        <label for="Crown">👑Crown</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Anchor" value="Anchor">
+                        <label for="Anchor">⚓Anchor</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Feather" value="Feather">
+                        <label for="Feather">🪶Feather</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="Cross" value="Cross">
+                        <label for="Cross">✝️Cross</label>
+                        </div>
+                        <div class="checkboxOption">
+                        <input type="checkbox" id="GiftWrapping" value="Gift Wrapping">
+                        <label for="Gift Wrapping">🎁Gift Wrapping (+$5.99)</label>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="formGroup">
+                        <label for="engraving">Engraving: (Max 20 chars):</label>
+                        <textarea name="message" class="message" id="engraving" row="30" column="30" placeholder="write your engraving here"></textarea>
+                    </div>
+                    <div class="formGroup">
+                        <div id="deliveryTypeGroup" class="radioGroup">
+                        <label for="deliveryType">Delivery Type:</label>
+                        <div class="radioOption">
+                            <input type="radio" id="Standard" value="Standard">
+                            <label for="Standard">📦Standard (5-6 days)</label>
+                        </div>
+                        <div class="radioOption">
+                            <input type="radio" id="Express" value="Express">
+                            <label for="Express">🚀Express (2-3 days) (+$10)</label>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="formGroup">
+                        <label for="quantity">Quantity:</label>
+                        <div class="quantityBox">
+                        <button class="changeQuantity" id="less" onclick="minusOne()">-</button>
+                        <p class="quantity" id="quantity">1</p>
+                        <button class="changeQuantity" id="more" onclick="plusOne()">+</button>
+                        </div>
+                    </div>
+                    <div class="button">
+                    <button type="submit" class="confirmOrder" id="confirmOrder" onclick="confirmOrder()">Confirm Order</button>
+                    </div>
+                </section>
+                <section class="orderSummary">
+                    <h2 class="sectionTitle">Order Summary</h2>
+                    <div id="summaryContent">
+                    <p class="orderSummaryContents" id="orderSummaryContents">Complete the form to see your order summary</p>
+                    </div>
+                    <div id="messageArea"></div>
+                </section>
+            </div>
+        </div>
+        <script>
+            var classicprice=25.99;
+            var charmprice=34.99;
+            var beadedprice=31.99;
+            var leatherprice=37.99;
+            var charmsprice=4.99;
+            var giftwrappingprice=5.99;
+            var expressdeliveryprice=10;
+            var engravingprice=6.99;
+            var quantity=1;
+            function minusOne(){
+                if(quantity > 1){
+                    quantity=quantity-1;
+                }
+                document.getElementById("quantity").innerText= quantity
+            }
+            function plusOne(){
+                if(quantity < 10){
+                    quantity=quantity+1;
+                }
+                document.getElementById("quantity").innerText= quantity
+            }
+            function confirmOrder(){
+                var name=document.getElementById("customerName").value;
+                var email=document.getElementById("email").value;
+                var tel=document.getElementById("phoneNumber").value;
+                if(name=="" || email=="" || tel==""){
+                showErrorMessage("Please fill all customer details","Error");
+                return;
+            }
+            if( email.indexOf("@")==-1){
+                showErrorMessage("please enter a valid email", "Error");
+            }
+            var braceletType="";
+            var braceletPrice=0;
+            if(document.getElementById("classic").checked){
+                braceletPrice=classicprice;
+                braceletType="Classic";
+            } else if (document.getElementById("charm").checked){
+                braceletPrice=charmprice;
+                braceletType="Charm";
+            } else if (document.getElementById("beaded").checked){
+                braceletPrice=beadedprice;
+                braceletType="Beaded";
+            } else if (document.getElementById("Leather").checked){
+                braceletPrice=leatherprice;
+                braceletType="Leather";
+            } else {
+                showErrorMessage("Select bracelet type","Error");
+                return;
+            }
+            var size= document.getElementById("braceletSize").value;
+            var material= document.getElementById("chainMaterial").value;
+            if(size==""|| material==""){
+                showErrorMessage("Select size and material", "Error");
+                return;
+            }
+            var materialCost=0;
+            if (material=="string"){
+                materialCost=10;
+            } if (material=="elastic"){
+                materialCost=15;
+            } if (material=="silk cord"){
+                materialCost=20;
+            }
+            var charmscount=0;
+            var selectedcharms=[];
+            if (document.getElementById("Heart").checked){
+                charmscount++;
+                selectedcharms.push("Heart")
+            }
+            if(document.getElementById("Star").checked){
+                charmscount++;
+                selectedcharms.push("Star");
+            }
+            if(document.getElementById("Moon").checked){
+                charmscount++;
+                selectedcharms.push("Moon");
+            }
+            if(document.getElementById("Flower").checked){
+                charmscount++;
+                selectedcharms.push("Flower");
+            }
+            if(document.getElementById("Butterfly").checked){
+                charmscount++;
+                selectedcharms.push("Butterfly");
+            }
+            if(document.getElementById("Infinity").checked){
+                charmscount++;
+                selectedcharms.push("Infinity");
+            }
+            if(document.getElementById("Key").checked){
+                charmscount++;
+                selectedcharms.push("Key");
+            }
+            if(document.getElementById("Crown").checked){
+                charmscount++;
+                selectedcharms.push("Crown");
+            }
+            if(document.getElementById("Anchor").checked){
+                charmscount++;
+                selectedcharms.push("Anchor");
+            }
+            if(document.getElementById("Feather").checked){
+                charmscount++;
+                selectedcharms.push("Feather");
+            }
+            if(document.getElementById("Cross").checked){
+                charmscount++;
+                selectedcharms.push("Cross");
+            }
+            var charmscost= charmscount*charmsprice;
+            var giftcost=0;
+            if(document.getElementById("GiftWrapping").checked){
+                giftcost=giftwrappingprice;
+            }
+            var deliverycost=0;
+            var deliverytext="standard";
+            if(document.getElementById("Express").checked){
+                deliverycost=expressdeliveryprice;
+                deliverytext="Express";
+            }
+            var engravingtext=document.getElementById("engraving").value;
+            var engravingcost=0;
+            if(engravingtext!=""){
+                engravingcost=engravingprice;
+            }
+            var subtotal=braceletprice + materialcost + charmscost + giftcost + deliverycost + engravingcost;
+            var total= subtotal*quantity;
+            let summaryHTML=`
+                <div class="summaryItem"><b>Customer:</b>${name}</div>
+                <div class="summaryItem"><b>Bracelet Type:</b>${braceletType}</div>
+                <div class="summaryItem"><b>Bracelet Size:</b>${material.charAT(0).toUpperCase()+material.slice(1)}</div>
+                <div class="summaryItem"><b>Charms:</b>${selectedcharms.length > 0?selectedcharms.join(", "):"None"}</div>
+                <div class="summaryItem"><b>Engraving</b>${engravingtext||"None"}</div>
+                <div class="summaryItem"><b>Gift Wrapping:</b>${giftcost > 0? "yes":"no"}</div>
+                <div class="summaryItem"><b>Delivery:</b>${deliverytext}</div>
+                <div class="summaryItem"><b>Quantity</b>${quantity}</div>
+                <div class="priceBreakdown"><div priceRow>
+                    <span>Subtotal:</span><span>$${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div class="priceRow" style="font-weight:bold; border-top:1px solid #ccc; padding-top:8px;">
+                        <span class="totalPrice">Total Price:</span><span>$${total.toFixed(2)}</span>
+                    </div></div>
+            `;
+            // condition ? valueIfTrue : valueIfFalse
+            document.getElementById("summaryContent").innerHtml="summaryHTML";
+            showMessage("Order Calculated Successfully!", "Success")
+            }
+            function showErrorMessage(text,type){
+                document.getElementById("messageArea").innerHTML="<div class='message message-"+type+"'>"+text+"</div>";
+                // Autohide message after 5 seconds
+                setTimeout(()=>{
+                    document.getElementById("messageArea").innerHTML="";
+                }, 5000);
+            }
+        </script>
+    </body>
+</html>
