@@ -35,9 +35,13 @@
                 margin-bottom:20px;
             }
             label{
-                display:block;
                 margin-bottom:2px;
                 font-weight:bold;
+            }
+            .radioOption label, .checkboxOption label{
+                display:inline;
+                margin:0;
+                margin-left:8px;
             }
             input[type="text"],input[type="email"], input[type="tel"], input[type="number"], select, textarea{
                 border:2px solid rgb(209, 209, 209);
@@ -70,6 +74,9 @@
                 border-color:rgb(106, 106, 255);
                 box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
                 transform:translateY(-2px)
+            }
+            .radioOption input, .checkboxOption input{
+                margin:8px;
             }
             .orderSummary{
                 border: 3px solid rgb(236, 236, 236);
@@ -158,23 +165,24 @@
                         <input type="tel" id="phoneNumber" placeholder="123-456-7890" required>
                     </div>
                     <div class="formGroup">
-                        <div id="braceletTypeGroup" class="radioGroup">
                         <label for="braceletType">Bracelet Type:</label>
-                        <div class="radioOption">
-                        <input type="radio" id="classic" name="braceletType"value="Classic">
-                        <label for="classic">Classic ($25.99)</label>
-                        </div>
-                        <div class="radioOption">
-                        <input type="radio" id="charm"name="braceletType" value="Charm">
-                        <label for="charm">Charm ($34.99)</label>
-                        </div>
-                        <div class="radioOption">
-                        <input type="radio" id="beaded" name="braceletType" value="Beaded">
-                        <label for="beaded">Beaded (31.99)</label>
-                        </div>
-                        <div class="radioOption">
-                        <input type="radio" id="Leather"name="braceletType" value="Leather">
-                        <label for="leather">Leather(37.99)</label>
+                        <div id="braceletTypeGroup" class="radioGroup">
+                            <div class="radioOption">
+                                <input type="radio" id="classic" name="braceletType"value="Classic">
+                                <label for="classic">Classic ($25.99)</label>
+                            </div>
+                            <div class="radioOption">
+                                <input type="radio" id="charm"name="braceletType" value="Charm">
+                                <label for="charm">Charm ($34.99)</label>
+                            </div>
+                            <div class="radioOption">
+                                <input type="radio" id="beaded" name="braceletType" value="Beaded">
+                                <label for="beaded">Beaded (31.99)</label>
+                            </div>
+                            <div class="radioOption">
+                                <input type="radio" id="Leather"name="braceletType" value="Leather">
+                                <label for="leather">Leather(37.99)</label>
+                            </div>
                         </div>
                     </div>
                     <div class="formGroup">
@@ -256,14 +264,14 @@
                         <textarea name="message" class="message" id="engraving" row="30" column="30" placeholder="write your engraving here"></textarea>
                     </div>
                     <div class="formGroup">
-                        <div id="deliveryTypeGroup" class="radioGroup">
                         <label for="deliveryType">Delivery Type:</label>
+                        <div id="deliveryTypeGroup" class="radioGroup">
                         <div class="radioOption">
-                            <input type="radio" id="Standard" value="Standard">
+                            <input type="radio" id="Standard" name="delivery" value="Standard">
                             <label for="Standard">📦Standard (5-6 days)</label>
                         </div>
                         <div class="radioOption">
-                            <input type="radio" id="Express" value="Express">
+                            <input type="radio" id="Express" name="delivery" value="Express">
                             <label for="Express">🚀Express (2-3 days) (+$10)</label>
                         </div>
                         </div>
@@ -416,12 +424,12 @@
             if(engravingtext!=""){
                 engravingcost=engravingprice;
             }
-            var subtotal=braceletprice + materialcost + charmscost + giftcost + deliverycost + engravingcost;
+            var subtotal=braceletPrice + materialCost + charmscost + giftcost + deliverycost + engravingcost;
             var total= subtotal*quantity;
             let summaryHTML=`
                 <div class="summaryItem"><b>Customer:</b>${name}</div>
                 <div class="summaryItem"><b>Bracelet Type:</b>${braceletType}</div>
-                <div class="summaryItem"><b>Bracelet Size:</b>${material.charAT(0).toUpperCase()+material.slice(1)}</div>
+                <div class="summaryItem"><b>Bracelet Size:</b>${material.charAt(0).toUpperCase()+material.slice(1)}</div>
                 <div class="summaryItem"><b>Charms:</b>${selectedcharms.length > 0?selectedcharms.join(", "):"None"}</div>
                 <div class="summaryItem"><b>Engraving</b>${engravingtext||"None"}</div>
                 <div class="summaryItem"><b>Gift Wrapping:</b>${giftcost > 0? "yes":"no"}</div>
@@ -435,8 +443,8 @@
                     </div></div>
             `;
             // condition ? valueIfTrue : valueIfFalse
-            document.getElementById("summaryContent").innerHtml="summaryHTML";
-            showMessage("Order Calculated Successfully!", "Success")
+            document.getElementById("summaryContent").innerHTML=summaryHTML;
+            showErrorMessage("Order Calculated Successfully!", "Success")
             }
             function showErrorMessage(text,type){
                 document.getElementById("messageArea").innerHTML="<div class='message message-"+type+"'>"+text+"</div>";
